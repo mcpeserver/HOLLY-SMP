@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Copy, Check, Info, Sparkles, Server } from "lucide-react";
+import { Copy, Check, Info, Sparkles, Server, ChevronUp } from "lucide-react";
 import { siteConfig } from "./config/site";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -16,18 +16,34 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState<"success" | "info">("success");
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Scroll Progress indicator logic
+  // Scroll Progress indicator and Back to Top visibility logic
   useEffect(() => {
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (totalScroll > 0) {
         setScrollProgress((window.scrollY / totalScroll) * 100);
+      } else {
+        setScrollProgress(0);
+      }
+
+      if (window.scrollY > 400) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   const triggerToast = (message: string, type: "success" | "info" = "success") => {
     setToastMessage(message);
@@ -74,7 +90,7 @@ export default function App() {
       {/* Dynamic Scroll Progress Bar at the absolute top */}
       <div 
         id="scroll-progress-bar"
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-autumn-orange via-autumn-gold to-autumn-orange z-50 transition-all duration-75"
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-autumn-orange via-autumn-gold to-autumn-orange z-[100] transition-all duration-75"
         style={{ width: `${scrollProgress}%` }}
       />
 
@@ -90,7 +106,7 @@ export default function App() {
       </a>
 
       {/* Main Content Sections wrapped in descriptive main semantic tag */}
-      <main id="main-content">
+      <main id="main-content" className="pt-[110px] md:pt-[120px]">
         {/* Hero Section */}
         <Hero 
           onCopyIP={handleCopyIP} 
@@ -184,6 +200,25 @@ export default function App() {
               </p>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Back to Top Floating Button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            id="back-to-top-btn"
+            className="fixed bottom-6 left-6 z-40 p-3.5 bg-gradient-to-br from-autumn-orange to-autumn-amber hover:from-autumn-amber hover:to-autumn-orange text-white rounded-full shadow-lg shadow-autumn-orange/30 border border-white/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-autumn-gold cursor-pointer"
+            aria-label="Kembali ke atas"
+          >
+            <ChevronUp className="w-5 h-5" />
+          </motion.button>
         )}
       </AnimatePresence>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Copy, Check, Menu, X, ShieldCheck } from "lucide-react";
 import { siteConfig } from "../config/site";
 
@@ -9,13 +9,28 @@ interface NavbarProps {
 
 export default function Navbar({ onCopyIP, isCopied }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="w-full z-50 transition-all duration-300">
+    <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md">
       {/* 1. TOP HEADER WATERMARK (RAN DEV) */}
       <div 
         id="top-developer-banner"
-        className="w-full bg-gradient-to-r from-autumn-orange via-autumn-amber to-autumn-orange text-white py-2 px-4 text-center text-xs md:text-sm font-medium tracking-wide shadow-sm flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2"
+        className={`w-full bg-gradient-to-r from-autumn-orange via-autumn-amber to-autumn-orange text-white px-4 text-center text-[10px] md:text-xs font-semibold tracking-wide shadow-sm flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2 border-b border-white/10 transition-all duration-300 ${
+          isScrolled ? "py-1.5 opacity-95" : "py-2.5 opacity-100"
+        }`}
       >
         <span>Developed by <strong className="underline decoration-autumn-gold underline-offset-2">{siteConfig.developer.name}</strong> (WhatsApp: {siteConfig.developer.whatsapp}) —</span>
         <span className="text-autumn-gold font-bold">{siteConfig.developer.pitch}</span>
@@ -24,7 +39,11 @@ export default function Navbar({ onCopyIP, isCopied }: NavbarProps) {
       {/* 2. MAIN NAVBAR */}
       <nav 
         id="main-navbar"
-        className="sticky top-0 w-full glass-panel border-b border-white/5 backdrop-blur-md z-40 py-3 px-4 md:px-8 flex items-center justify-between"
+        className={`relative w-full border-b backdrop-blur-md px-4 md:px-8 flex items-center justify-between transition-all duration-300 ${
+          isScrolled 
+            ? "bg-autumn-dark/95 border-autumn-orange/30 shadow-xl shadow-black/40 py-2.5" 
+            : "bg-autumn-deep/45 border-white/5 py-3.5"
+        }`}
       >
         {/* Brand Logo & Title */}
         <div className="flex items-center gap-3">
