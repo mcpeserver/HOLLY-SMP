@@ -1,7 +1,7 @@
 # 🍁 Holly SMP | Season Six — Official Landing Page 🦊
 
 <div align="center">
-  <img src="/logo.png" alt="Holly SMP Logo" width="120" style="filter: drop-shadow(0 4px 12px rgba(249, 115, 22, 0.5));" />
+  <img src="public/logo.png" alt="Holly SMP Logo" width="120" style="filter: drop-shadow(0 4px 12px rgba(249, 115, 22, 0.5));" />
   
   ### ✨ Estetika Autumn Forest Sky Island Premium ✨
   
@@ -30,7 +30,7 @@ Pemandangan pulau melayang Minecraft yang memanjakan mata dengan daun-daun musim
 ```text
 /hero-bg.webp (Absolute Path)
 ```
-<img src="/hero-bg.webp" alt="Hero Background Preview" width="100%" style="border-radius: 12px; border: 1px solid rgba(249, 115, 22, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+<img src="public/hero-bg.webp" alt="Hero Background Preview" width="100%" style="border-radius: 12px; border: 1px solid rgba(249, 115, 22, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
 
 ### 🛡️ Social Media Share Preview (Open Graph)
 Gambar yang muncul otomatis ketika tautan landing page ini dibagikan ke WhatsApp, Discord, Facebook, atau Twitter:
