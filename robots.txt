@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://egeria.arqonara.com/sitemap.xml
