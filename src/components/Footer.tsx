@@ -1,7 +1,12 @@
 import { siteConfig } from "../config/site";
 import { ChevronUp, ExternalLink } from "lucide-react";
+import { DevData } from "../App";
 
-export default function Footer() {
+interface FooterProps {
+  devData: DevData;
+}
+
+export default function Footer({ devData }: FooterProps) {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -47,14 +52,71 @@ export default function Footer() {
 
       </div>
 
-      {/* 3. FOOTER WATERMARK (Developed by RAN DEV) */}
-      <div className="max-w-5xl mx-auto mt-10 pt-6 border-t border-white/5 text-center flex flex-col items-center justify-center gap-1.5">
-        <p className="text-xs text-stone-500 font-mono">
-          Website dikembangkan oleh <span className="text-stone-300 font-bold font-sans">{siteConfig.developer.name}</span> (WhatsApp: <a href={`https://wa.me/${siteConfig.developer.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-autumn-orange hover:underline font-bold inline-flex items-center gap-0.5 font-mono">{siteConfig.developer.whatsapp}<ExternalLink className="w-3 h-3" /></a>)
-        </p>
-        <p className="text-[10px] text-stone-600 italic">
-          "{siteConfig.developer.pitch}"
-        </p>
+      {/* 3. FOOTER WATERMARK (Developed by RAN DEV & COMMUNITY HUB) */}
+      <div className="max-w-5xl mx-auto mt-10 pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-stone-400">
+        
+        {/* Left Side: Developer Info */}
+        <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1.5">
+          <h4 className="text-xs uppercase font-mono tracking-wider text-autumn-orange font-bold">Informasi Pengembang</h4>
+          <p className="text-xs text-stone-400 mt-1 leading-relaxed">
+            Website dikembangkan secara profesional oleh <span className="text-white font-bold">{devData.name}</span>.
+          </p>
+          <div className="flex items-center gap-3 mt-1.5 text-xs flex-wrap justify-center md:justify-start">
+            <a 
+              href={`https://wa.me/${devData.contact.whatsapp}`} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-autumn-orange hover:text-white hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
+            >
+              <span>WhatsApp: {devData.contact.whatsapp}</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <span className="text-stone-700 hidden sm:inline">|</span>
+            <a 
+              href={devData.website.portfolio} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-autumn-gold hover:text-white hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Website Portofolio</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
+        </div>
+
+        {/* Right Side: Developer Community */}
+        <div className="flex flex-col items-center md:items-end text-center md:text-right gap-1.5">
+          <h4 className="text-xs uppercase font-mono tracking-wider text-autumn-gold font-bold">Komunitas Developer</h4>
+          <p className="text-xs text-stone-400 mt-1 leading-relaxed">
+            Bergabunglah dengan komunitas resmi kami <span className="text-white font-bold">{devData.community.name}</span>.
+          </p>
+          <div className="flex items-center gap-3 mt-1.5 text-xs flex-wrap justify-center md:justify-end">
+            <a 
+              href={devData.community.website} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-autumn-orange hover:text-white hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Grup Komunitas</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            {devData.community.discord && (
+              <>
+                <span className="text-stone-700 hidden sm:inline">|</span>
+                <a 
+                  href={devData.community.discord} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-indigo-400 hover:text-white hover:underline font-semibold inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>Discord Komunitas</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </>
+            )}
+          </div>
+        </div>
+
       </div>
     </footer>
   );

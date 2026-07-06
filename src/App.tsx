@@ -9,6 +9,38 @@ import RulesSection from "./components/RulesSection";
 import SocialSection from "./components/SocialSection";
 import Footer from "./components/Footer";
 
+export interface DevData {
+  name: string;
+  contact: {
+    phone: string;
+    whatsapp: string;
+  };
+  website: {
+    portfolio: string;
+  };
+  community: {
+    name: string;
+    website: string;
+    discord: string;
+  };
+}
+
+const defaultDevData: DevData = {
+  name: siteConfig.developer.name,
+  contact: {
+    phone: siteConfig.developer.whatsapp,
+    whatsapp: siteConfig.developer.whatsapp,
+  },
+  website: {
+    portfolio: "https://ran-dev.my.id",
+  },
+  community: {
+    name: "RAN DEV Community",
+    website: "https://chat.whatsapp.com/GQG74pW0b2TBeh4iGZ5j8E",
+    discord: "https://discord.gg/VMyy6F7B9X",
+  }
+};
+
 export default function App() {
   const [isCopied, setIsCopied] = useState(false);
   const [isRedeemCopied, setIsRedeemCopied] = useState(false);
@@ -17,6 +49,38 @@ export default function App() {
   const [toastType, setToastType] = useState<"success" | "info">("success");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [devData, setDevData] = useState<DevData>(defaultDevData);
+
+  // Fetch developer & community API on load
+  useEffect(() => {
+    fetch("https://raw.githubusercontent.com/mcpeserver/MyAPI/main/config.json")
+      .then((res) => {
+        if (!res.ok) throw new Error("API response error");
+        return res.json();
+      })
+      .then((data) => {
+        if (data) {
+          setDevData({
+            name: data.name || defaultDevData.name,
+            contact: {
+              phone: data.contact?.phone || defaultDevData.contact.phone,
+              whatsapp: data.contact?.whatsapp || defaultDevData.contact.whatsapp,
+            },
+            website: {
+              portfolio: data.website?.portfolio || defaultDevData.website.portfolio,
+            },
+            community: {
+              name: data.community?.name || defaultDevData.community.name,
+              website: data.community?.website || defaultDevData.community.website,
+              discord: data.community?.discord || defaultDevData.community.discord,
+            }
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn("Using default developer/community config:", err);
+      });
+  }, []);
 
   // Scroll Progress indicator and Back to Top visibility logic
   useEffect(() => {
@@ -95,7 +159,7 @@ export default function App() {
       />
 
       {/* Header & Sticky Main Navbar */}
-      <Navbar onCopyIP={handleCopyIP} isCopied={isCopied} />
+      <Navbar onCopyIP={handleCopyIP} isCopied={isCopied} devData={devData} />
 
       {/* Skip to Content button for Accessibility (WCAG compliant) */}
       <a 
@@ -166,7 +230,7 @@ export default function App() {
       </main>
 
       {/* Footer Block */}
-      <Footer />
+      <Footer devData={devData} />
 
       {/* Dynamic Toast Notifications (Aesthetics and Usability) */}
       <AnimatePresence>
