@@ -69,13 +69,6 @@ export default function Hero({ onCopyIP, isCopied, onCopyRedeem, isRedeemCopied 
           >
             HOLLY <span className="text-transparent bg-clip-text bg-gradient-to-r from-autumn-orange via-autumn-gold to-autumn-amber">SMP</span>
           </h1>
-
-          <p 
-            id="hero-subtitle"
-            className="font-display text-xl md:text-2xl font-bold text-autumn-gold tracking-wide mt-1 flex items-center gap-2"
-          >
-            🦊 Season Six 🦊
-          </p>
           
           <p 
             id="hero-description"
