@@ -36,7 +36,7 @@ export default function Footer({ devData }: FooterProps) {
         <div className="flex items-center gap-5 text-xs font-semibold text-stone-400">
           <a href="#hero" className="hover:text-autumn-orange transition-colors">Utama</a>
           <a href="#rules" className="hover:text-autumn-orange transition-colors">Peraturan</a>
-          <a href="#connection" className="hover:text-autumn-orange transition-colors">Koneksi</a>
+          <a href="#connection" className="hover:text-autumn-orange transition-colors">Grup WA</a>
           <a href="#social" className="hover:text-autumn-orange transition-colors">Komunitas</a>
         </div>
 

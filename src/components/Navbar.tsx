@@ -107,7 +107,7 @@ export default function Navbar({ onCopyIP, isCopied, devData, activeTab, setActi
                 activeTab === "connection" ? "text-autumn-orange border-autumn-orange font-bold" : "border-transparent text-stone-300"
               }`}
             >
-              Koneksi
+              Grup WA
             </button>
             <button 
               onClick={() => setActiveTab("social")} 
@@ -152,25 +152,18 @@ export default function Navbar({ onCopyIP, isCopied, devData, activeTab, setActi
             </div>
           </div>
 
-          {/* Copy IP Fast Action Button */}
-          <button
-            id="nav-copy-btn"
-            onClick={onCopyIP}
-            className="relative overflow-hidden group flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-autumn-orange to-autumn-amber hover:from-autumn-amber hover:to-autumn-orange text-white text-xs font-bold font-mono tracking-wider uppercase rounded-lg shadow-md transition-all duration-300 hover:shadow-autumn-orange/20 hover:scale-[1.02]"
-            aria-label="Salin alamat IP server"
+          {/* WhatsApp Group Quick-Link Button */}
+          <a
+            id="nav-join-wa"
+            href={siteConfig.links.whatsappGroup}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative overflow-hidden group flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-teal-600 hover:to-emerald-500 text-white text-xs font-bold font-sans tracking-wider uppercase rounded-lg shadow-md transition-all duration-300 hover:shadow-emerald-500/20 hover:scale-[1.02]"
+            aria-label="Gabung Grup WhatsApp"
           >
-            {isCopied ? (
-              <>
-                <Check className="w-3.5 h-3.5" />
-                <span>Tersalin!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-3.5 h-3.5 group-hover:rotate-6 transition-transform" />
-                <span>Salin IP</span>
-              </>
-            )}
-          </button>
+            <MessageSquare className="w-3.5 h-3.5 group-hover:scale-110 transition-transform text-white" />
+            <span>Grup WA</span>
+          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -209,7 +202,7 @@ export default function Navbar({ onCopyIP, isCopied, devData, activeTab, setActi
               onClick={() => { setActiveTab("connection"); setIsMobileMenuOpen(false); }}
               className={`py-2 text-left border-b border-white/5 hover:text-autumn-orange transition-colors cursor-pointer ${activeTab === "connection" ? "text-autumn-orange font-bold" : ""}`}
             >
-              Koneksi Server
+              Grup WhatsApp
             </button>
             <button 
               onClick={() => { setActiveTab("social"); setIsMobileMenuOpen(false); }}
@@ -219,26 +212,17 @@ export default function Navbar({ onCopyIP, isCopied, devData, activeTab, setActi
             </button>
           </div>
 
-          <button
-            id="mobile-drawer-copy-btn"
-            onClick={() => {
-              onCopyIP();
-              setIsMobileMenuOpen(false);
-            }}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-autumn-orange text-white text-xs font-mono tracking-widest font-bold rounded-lg uppercase shadow-lg shadow-autumn-orange/10"
+          <a
+            id="mobile-drawer-join-wa-btn"
+            href={siteConfig.links.whatsappGroup}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-sans tracking-widest font-bold rounded-lg uppercase shadow-lg shadow-emerald-500/10"
           >
-            {isCopied ? (
-              <>
-                <Check className="w-4 h-4" />
-                <span>IP Berhasil Disalin!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4" />
-                <span>Salin IP: {siteConfig.server.ip}</span>
-              </>
-            )}
-          </button>
+            <MessageSquare className="w-4 h-4 text-white" />
+            <span>Gabung Grup WA Resmi</span>
+          </a>
 
           {/* Dynamic Developer & Community Links inside mobile menu */}
           <div className="mt-2 p-3.5 bg-black/40 rounded-xl border border-white/5 flex flex-col gap-2.5 text-xs">

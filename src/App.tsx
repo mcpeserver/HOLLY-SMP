@@ -280,7 +280,7 @@ export default function App() {
               transition={{ duration: 0.25 }}
             >
               {/* Connection Information Section */}
-              <ConnectionSection onCopyIP={handleCopyIP} isCopied={isCopied} />
+              <ConnectionSection />
             </motion.div>
           )}
 

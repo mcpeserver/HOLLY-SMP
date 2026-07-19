@@ -1,16 +1,13 @@
 import { motion } from "motion/react";
-import { Server, Wifi, Hash, Layers, Copy, Check, ShieldCheck, Cpu } from "lucide-react";
+import { MessageSquare, ArrowRight, CheckCircle, Users, Bell, ShieldAlert } from "lucide-react";
 import { siteConfig } from "../config/site";
 
-interface ConnectionSectionProps {
-  onCopyIP: () => void;
-  isCopied: boolean;
-}
+export default function ConnectionSection() {
+  const waGroupLink = siteConfig.links.whatsappGroup;
 
-export default function ConnectionSection({ onCopyIP, isCopied }: ConnectionSectionProps) {
   return (
     <section id="connection" className="py-20 px-4 md:px-8 relative bg-gradient-to-b from-autumn-dark to-autumn-deep overflow-hidden">
-      {/* Decorative ambient background assets */}
+      {/* Decorative ambient background glows */}
       <div className="absolute top-0 left-1/4 w-80 h-80 bg-autumn-orange/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-autumn-gold/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -18,152 +15,135 @@ export default function ConnectionSection({ onCopyIP, isCopied }: ConnectionSect
         
         {/* Section Title */}
         <div className="text-center mb-12">
-          <span className="text-xs font-mono font-bold tracking-widest text-autumn-orange uppercase bg-autumn-orange/10 px-3.5 py-1 rounded-full border border-autumn-orange/20">
-            Akses Masuk Server
+          <span className="text-xs font-mono font-bold tracking-widest text-emerald-500 uppercase bg-emerald-500/10 px-4 py-1.5 rounded-full border border-emerald-500/20">
+            Akses Masuk & Komunitas
           </span>
-          <h2 className="font-display font-extrabold text-3xl md:text-5xl text-white mt-3 tracking-tight">
-            Koneksi Resmi Server
+          <h2 className="font-display font-extrabold text-3xl md:text-5xl text-white mt-4 tracking-tight">
+            Gabung Grup WhatsApp Resmi
           </h2>
-          <p className="text-stone-400 text-sm md:text-base mt-2 max-w-lg mx-auto">
-            Gunakan informasi port dan alamat IP resmi berikut untuk langsung masuk ke dunia petualangan Holly SMP.
+          <p className="text-stone-400 text-sm md:text-base mt-3 max-w-xl mx-auto leading-relaxed">
+            Untuk menjaga kenyamanan bermain dan keamanan server dari gangguan, informasi akses (IP & Port) dibagikan secara eksklusif di dalam grup WhatsApp kami.
           </p>
         </div>
 
-        {/* Connection Widget Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        {/* Central Featured WhatsApp Banner */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative group mb-12"
+        >
+          {/* Animated glow border */}
+          <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500 via-autumn-orange to-autumn-gold opacity-20 group-hover:opacity-40 blur-xl transition duration-500" />
           
-          {/* Card 1: Server IP Address */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4"
-          >
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="p-3 bg-autumn-orange/10 rounded-xl text-autumn-orange border border-autumn-orange/20">
-                  <Server className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-autumn-orange/20 text-autumn-orange">
-                  Utama
-                </span>
+          <div className="relative glass-panel-heavy border-emerald-500/25 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-black/60">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+              <div className="p-5 bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/20 animate-slow-float shadow-lg shadow-emerald-500/5">
+                <MessageSquare className="w-10 h-10" />
               </div>
-              
-              <h3 className="text-stone-400 text-xs font-semibold uppercase tracking-wider mt-5">
-                ➥ IP Address
-              </h3>
-              <p className="text-white font-mono font-bold text-lg md:text-xl tracking-tight mt-1 truncate">
-                {siteConfig.server.ip}
-              </p>
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 inline-block">
+                  WhatsApp Group
+                </span>
+                <h3 className="text-2xl font-display font-extrabold text-white mt-2">
+                  Holly SMP Official Community
+                </h3>
+                <p className="text-stone-300 text-sm mt-2 max-w-md leading-relaxed">
+                  Ketuk tombol di sebelah kanan untuk langsung bergabung dengan ratusan pemain aktif lainnya dan dapatkan info server terbaru secara real-time.
+                </p>
+              </div>
             </div>
 
-            <button
-              id="conn-copy-ip-btn"
-              onClick={onCopyIP}
-              className="w-full mt-2 py-3 bg-autumn-orange/10 hover:bg-autumn-orange text-autumn-orange hover:text-white border border-autumn-orange/20 hover:border-transparent text-xs font-mono font-bold tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 transition-all duration-300"
-            >
-              {isCopied ? (
-                <>
-                  <Check className="w-4 h-4 animate-scale-up" />
-                  <span>IP Tersalin!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4" />
-                  <span>Salin IP</span>
-                </>
-              )}
-            </button>
+            <div className="w-full md:w-auto flex flex-col items-center gap-3">
+              <a
+                href={waGroupLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-[1.03] cursor-pointer"
+              >
+                <span>Gabung Grup Sekarang</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <span className="text-[11px] font-mono text-stone-500">
+                Tautan aman: bit.ly/hollygrup
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Benefit 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="glass-card rounded-2xl p-6 border-white/5 hover:border-emerald-500/30 transition-all duration-300 bg-autumn-deep/35"
+          >
+            <div className="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20 w-fit mb-5">
+              <CheckCircle className="w-6 h-6" />
+            </div>
+            <h4 className="text-white font-display font-bold text-lg">Akses IP & Port</h4>
+            <p className="text-stone-400 text-xs mt-2.5 leading-relaxed">
+              Dapatkan detail koneksi server (IP & Port) yang selalu terupdate langsung dari deskripsi grup atau sapa admin di grup chat.
+            </p>
           </motion.div>
 
-          {/* Card 2: Server Port */}
+          {/* Benefit 2 */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4"
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="glass-card rounded-2xl p-6 border-white/5 hover:border-autumn-orange/30 transition-all duration-300 bg-autumn-deep/35"
           >
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="p-3 bg-autumn-gold/10 rounded-xl text-autumn-gold border border-autumn-gold/20">
-                  <Hash className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-autumn-gold/20 text-autumn-gold">
-                  Port Koneksi
-                </span>
-              </div>
-              
-              <h3 className="text-stone-400 text-xs font-semibold uppercase tracking-wider mt-5">
-                ➥ Port Server
-              </h3>
-              <p className="text-white font-mono font-bold text-2xl tracking-wide mt-1">
-                {siteConfig.server.port}
-              </p>
+            <div className="p-3 bg-autumn-orange/10 text-autumn-orange rounded-xl border border-autumn-orange/20 w-fit mb-5">
+              <Bell className="w-6 h-6" />
             </div>
-
-            <div className="w-full mt-2 py-3 bg-neutral-900/60 text-stone-400 border border-white/5 text-xs font-mono font-bold tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 select-all">
-              <span>Port Bedrock / Java</span>
-            </div>
+            <h4 className="text-white font-display font-bold text-lg">Info & Event Terbaru</h4>
+            <p className="text-stone-400 text-xs mt-2.5 leading-relaxed">
+              Jadilah yang pertama tahu tentang jadwal maintenance, update versi Minecraft, event menarik berhadiah, dan pergantian musim server.
+            </p>
           </motion.div>
 
-          {/* Card 3: Server Type */}
+          {/* Benefit 3 */}
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4"
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="glass-card rounded-2xl p-6 border-white/5 hover:border-autumn-gold/30 transition-all duration-300 bg-autumn-deep/35"
           >
-            <div>
-              <div className="flex items-center justify-between">
-                <div className="p-3 bg-autumn-green/10 rounded-xl text-autumn-green border border-autumn-green/20">
-                  <Layers className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-autumn-green/20 text-autumn-green">
-                  Edisi
-                </span>
-              </div>
-              
-              <h3 className="text-stone-400 text-xs font-semibold uppercase tracking-wider mt-5">
-                ➥ Tipe Server
-              </h3>
-              <p className="text-white font-display font-bold text-xl tracking-tight mt-1">
-                Vanilla / Bedrock Edition
-              </p>
+            <div className="p-3 bg-autumn-gold/10 text-autumn-gold rounded-xl border border-autumn-gold/20 w-fit mb-5">
+              <Users className="w-6 h-6" />
             </div>
-
-            <div className="w-full mt-2 py-3 bg-neutral-900/60 text-stone-400 border border-white/5 text-xs font-sans font-bold tracking-wider uppercase rounded-xl flex items-center justify-center gap-2">
-              <Cpu className="w-4 h-4 text-autumn-green" />
-              <span>Multiplatform Play</span>
-            </div>
+            <h4 className="text-white font-display font-bold text-lg">Mabar & Cari Teman</h4>
+            <p className="text-stone-400 text-xs mt-2.5 leading-relaxed">
+              Temukan rekan satu tim untuk membangun kota impian Anda, berdagang item, membentuk clan, atau sekadar menjelajahi dunia luas Holly SMP bersama.
+            </p>
           </motion.div>
 
         </div>
 
-        {/* Extra Information box */}
+        {/* Informational Banner */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10 p-5 rounded-2xl border border-white/5 bg-black/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left"
+          transition={{ duration: 0.5 }}
+          className="mt-10 p-5 rounded-2xl border border-amber-500/20 bg-amber-500/5 flex items-start gap-4"
         >
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-autumn-green/15 rounded-lg text-autumn-green">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-white">Performa Stabil & Server Aman</p>
-              <p className="text-[11px] text-stone-400 mt-0.5">Sistem pencegahan DDOS aktif 24/7 untuk memastikan kelancaran bermain tanpa lag.</p>
-            </div>
+          <div className="p-2.5 bg-amber-500/10 text-amber-500 rounded-lg shrink-0">
+            <ShieldAlert className="w-5 h-5" />
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-stone-400">Status Server:</span>
-            <span className="text-xs font-mono font-bold text-autumn-green px-2 py-1 rounded bg-autumn-green/10 border border-autumn-green/20">
-              {siteConfig.server.statusIndicators.online}
-            </span>
+          <div>
+            <h5 className="text-xs font-bold text-white tracking-wide">Pemberitahuan Keamanan</h5>
+            <p className="text-[11px] text-stone-400 mt-1 leading-relaxed">
+              Harap berhati-hati terhadap pihak asing yang membagikan tautan atau file di luar grup WhatsApp resmi ini. Segala bentuk pengumuman resmi dan pembagian item hadiah hanya dilakukan melalui koordinasi admin berwenang di grup Holly SMP.
+            </p>
           </div>
         </motion.div>
 

@@ -23,7 +23,7 @@ export const siteConfig = {
     }
   },
   links: {
-    whatsappGroup: "https://bit.ly/hollygc",
+    whatsappGroup: "https://bit.ly/hollygrup",
     tiktok: "https://bit.ly/hollytiktok",
     discord: "https://bit.ly/hollydiscord"
   },

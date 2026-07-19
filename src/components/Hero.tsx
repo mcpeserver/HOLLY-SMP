@@ -129,33 +129,26 @@ export default function Hero({ onCopyIP, isCopied, onCopyRedeem, isRedeemCopied 
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4"
         >
-          {/* Main Action: Copy Server IP */}
-          <button
-            id="hero-copy-ip-btn"
-            onClick={onCopyIP}
-            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-autumn-orange via-autumn-amber to-autumn-orange bg-[length:200%_auto] hover:bg-right text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-autumn-orange/20 flex items-center justify-center gap-3 transition-all duration-500 hover:scale-[1.03]"
-          >
-            {isCopied ? (
-              <>
-                <Check className="w-5 h-5" />
-                <span>Alamat IP Tersalin!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-5 h-5" />
-                <span>Salin Alamat IP</span>
-              </>
-            )}
-          </button>
-
-          {/* Secondary Action: Join Community */}
+          {/* Main Action: Join WhatsApp Group */}
           <a
-            id="hero-community-btn"
-            href="#social"
+            id="hero-join-wa-btn"
+            href={siteConfig.links.whatsappGroup}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:opacity-95 text-white font-bold text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.03]"
+          >
+            <Users className="w-5 h-5 text-white animate-pulse" />
+            <span>Gabung Grup WhatsApp</span>
+          </a>
+
+          {/* Secondary Action: Join Guide */}
+          <a
+            id="hero-guide-btn"
+            href="#connection"
             className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold text-sm uppercase tracking-wider rounded-xl border border-white/10 flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.03]"
           >
-            <Users className="w-5 h-5 text-autumn-gold" />
-            <span>Gabung Komunitas</span>
+            <Sparkles className="w-5 h-5 text-autumn-gold" />
+            <span>Cara Join Server</span>
           </a>
         </motion.div>
 
